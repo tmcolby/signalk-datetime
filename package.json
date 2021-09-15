@@ -20,7 +20,8 @@
         "url": "https://github.com/tmcolby/signalk-datetime/issues"
     },
     "keywords": [
-        "signalk-node-server-plugin"
+        "signalk-node-server-plugin",
+        "signalk-category-utility"
     ],
     "dependencies": {
         "shelljs": "^0.8.4"
