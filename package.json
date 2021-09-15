@@ -1,0 +1,28 @@
+{
+    "name": "signalk-datetime",
+    "version": "1.0.0",
+    "description": "SignalK plugin that maps the output of the Linux 'date' command to a SignalK path",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": {
+        "name": "Tyson Colby",
+        "email": "tyson.colby@innotech.engineering"
+    },
+    "license": "Apache-2.0",
+    "homepage": "https://github.com/tmcolby/signalk-datetime#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/tmcolby/signalk-datetime"
+    },
+    "bugs": {
+        "url": "https://github.com/tmcolby/signalk-datetime/issues"
+    },
+    "keywords": [
+        "signalk-node-server-plugin"
+    ],
+    "dependencies": {
+        "shelljs": "^0.8.4"
+    }
+}
