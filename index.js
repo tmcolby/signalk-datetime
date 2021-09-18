@@ -51,34 +51,45 @@ module.exports = function(app) {
     }
 
     plugin.start = function(options) {
-        function update() {
-            shell.exec('date ' + (options.format === "null" ? '' : options.format), {
-                silent: true
-            }, (exitCode, stdout) => {
-                if (exitCode) {
-                    error(`date command failed with exit code ${exitCode}`);
-                } else {
-                    app.handleMessage(plugin.id, {
-                        updates: [{
-                            values: [{
-                                path: options.path,
-                                value: stdout.replace('\n', '')
-                            }]
-                        }]
-                    });
-
-                }
+        app.streambundle.getSelfStream("navigation.datetime").forEach((datetime) => {
+            app.handleMessage(plugin.id, {
+                updates: [{
+                    values: [{
+                        path: options.path,
+                        value: datetime
+                    }]
+                }]
             });
-        }
+        });
 
-        if (process.platform == "win32") {
-            error("signalk-datetime plugin only works on linux-like os's");
-        } else {
-            // initialize with some data immediately when the plugin starts
-            update();
-            // update path once per second
-            timer = setInterval(update, options.rate * 1000);
-        }
+        // function update() {
+        //     shell.exec('date ' + (options.format === "null" ? '' : options.format), {
+        //         silent: true
+        //     }, (exitCode, stdout) => {
+        //         if (exitCode) {
+        //             error(`date command failed with exit code ${exitCode}`);
+        //         } else {
+        //             app.handleMessage(plugin.id, {
+        //                 updates: [{
+        //                     values: [{
+        //                         path: options.path,
+        //                         value: stdout.replace('\n', '')
+        //                     }]
+        //                 }]
+        //             });
+
+        //         }
+        //     });
+        // }
+
+        // if (process.platform == "win32") {
+        //     error("signalk-datetime plugin only works on linux-like os's");
+        // } else {
+        //     // initialize with some data immediately when the plugin starts
+        //     update();
+        //     // update path once per second
+        //     timer = setInterval(update, options.rate * 1000);
+        // }
     }
 
     plugin.stop = function() {
