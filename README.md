@@ -130,6 +130,115 @@ https://man7.org/linux/man-pages/man1/date.1.html
        locale's alternate numeric symbols if available.
 ```  
 
+https://www.npmjs.com/package/dateformat
+Mask options
+```
+|Mask | Description |
+|-----|-------------|
+|d	| Day of the month as digits; no leading zero for single-digit days. |
+|dd	| Day of the month as digits; leading zero for single-digit days. |
+|ddd	| Day of the week as a three-letter abbreviation. |
+|DDD	| "Ysd", "Tdy" or "Tmw" if date lies within these three days. Else fall back to ddd. |
+|dddd	Day of the week as its full name.
+|DDDD	"Yesterday", "Today" or "Tomorrow" if date lies within these three days. Else fall back to dddd.
+|m	Month as digits; no leading zero for single-digit months.
+|mm	Month as digits; leading zero for single-digit months.
+|mmm	Month as a three-letter abbreviation.
+|mmmm	Month as its full name.
+|yy	Year as last two digits; leading zero for years less than 10.
+|yyyy	Year represented by four digits.
+|h	Hours; no leading zero for single-digit hours (12-hour clock).
+|hh	Hours; leading zero for single-digit hours (12-hour clock).
+|H	Hours; no leading zero for single-digit hours (24-hour clock).
+|HH	Hours; leading zero for single-digit hours (24-hour clock).
+|M	Minutes; no leading zero for single-digit minutes.
+|MM	Minutes; leading zero for single-digit minutes.
+|N	ISO 8601 numeric representation of the day of the week.
+|o	GMT/UTC timezone offset, e.g. -0500 or +0230.
+|p	GMT/UTC timezone offset, e.g. -05:00 or +02:30.
+|s	Seconds; no leading zero for single-digit seconds.
+|ss	Seconds; leading zero for single-digit seconds.
+|S	The date's ordinal suffix (st, nd, rd, or th). Works well with d.
+|l	Milliseconds; gives 3 digits.
+|L	Milliseconds; gives 2 digits.
+|t	Lowercase, single-character time marker string: a or p.
+|tt	Lowercase, two-character time marker string: am or pm.
+|T	Uppercase, single-character time marker string: A or P.
+|TT	Uppercase, two-character time marker string: AM or PM.
+|W	ISO 8601 week number of the year, e.g. 4, 42
+|WW	ISO 8601 week number of the year, leading zero for single-digit, e.g. 04, 42
+|Z	US timezone abbreviation, e.g. EST or MDT. For non-US timezones, the GMT/UTC offset is returned, e.g. GMT-0500
+|'...', "..."	Literal character sequence. Surrounding quotes are removed.
+|UTC:	Must be the first four characters of the mask. Converts the date from local time to UTC/GMT/Zulu time before applying the mask. The "UTC:" prefix is removed.
+```
+
+Named Formats
+```
+Name	Mask	Example
+default	ddd mmm dd yyyy HH:MM:ss	Sat Jun 09 2007 17:46:21
+shortDate	m/d/yy	6/9/07
+paddedShortDate	mm/dd/yyyy	06/09/2007
+mediumDate	mmm d, yyyy	Jun 9, 2007
+longDate	mmmm d, yyyy	June 9, 2007
+fullDate	dddd, mmmm d, yyyy	Saturday, June 9, 2007
+shortTime	h:MM TT	5:46 PM
+mediumTime	h:MM:ss TT	5:46:21 PM
+longTime	h:MM:ss TT Z	5:46:21 PM EST
+isoDate	yyyy-mm-dd	2007-06-09
+isoTime	HH:MM:ss	17:46:21
+isoDateTime	yyyy-mm-dd'T'HH:MM:sso	2007-06-09T17:46:21+0700
+isoUtcDateTime	UTC:yyyy-mm-dd'T'HH:MM:ss'Z'	2007-06-09T22:46:21Z
+```
+
+Javascript Options key examples:  
+```
+day:
+The representation of the day.
+Possible values are "numeric", "2-digit".
+weekday:
+The representation of the weekday.
+Possible values are "narrow", "short", "long".
+year:
+The representation of the year.
+Possible values are "numeric", "2-digit".
+month:
+The representation of the month.
+Possible values are "numeric", "2-digit", "narrow", "short", "long".
+hour:
+The representation of the hour.
+Possible values are "numeric", "2-digit".
+minute: The representation of the minute.
+Possible values are "numeric", "2-digit".
+second:
+The representation of the second.
+Possible values are "numeric", 2-digit".
+```
+
+jQuery format
+```
+Date and time patterns
+yy = short year
+yyyy = long year
+M = month (1-12)
+MM = month (01-12)
+MMM = month abbreviation (Jan, Feb ... Dec)
+MMMM = long month (January, February ... December)
+d = day (1 - 31)
+dd = day (01 - 31)
+ddd = day of the week in words (Monday, Tuesday ... Sunday)
+E = short day of the week in words (Mon, Tue ... Sun)
+D - Ordinal day (1st, 2nd, 3rd, 21st, 22nd, 23rd, 31st, 4th...)
+h = hour in am/pm (0-12)
+hh = hour in am/pm (00-12)
+H = hour in day (0-23)
+HH = hour in day (00-23)
+mm = minute
+ss = second
+SSS = milliseconds
+a = AM/PM marker
+p = a.m./p.m. marker
+```
+
 ## Future Ideas and Considerations 
  - If the vessel is equipped with GPS and already has time and date from GNSS positioning system, perhaps we could subscribe to that path and remap the ISO 8601 datetime string value to a new user-definable path with the applied formatting.  
  - Both GNSS positioning system time and Linux `date` can be used together, with the preferred source definable by the user.

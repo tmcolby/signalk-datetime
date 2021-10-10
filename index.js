@@ -14,6 +14,7 @@
  */
 
 const shell = require('shelljs');
+const dateFormat = require('dateformat');
 
 module.exports = function(app) {
     let plugin = {};
@@ -33,8 +34,8 @@ module.exports = function(app) {
             format: {
                 type: 'string',
                 title: 'Format options',
-                description: 'Can accept magic value "null" to output default format like "Wed 15 Sep 2021 08:17:10 AM PDT"',
-                default: '+%H:%M:%S'
+                description: 'see README.md',
+                default: 'HH:MM:SS'
             },
             rate: {
                 type: 'number',
@@ -51,15 +52,22 @@ module.exports = function(app) {
     }
 
     plugin.start = function(options) {
+
         app.streambundle.getSelfStream("navigation.datetime").forEach((datetime) => {
-            app.handleMessage(plugin.id, {
-                updates: [{
-                    values: [{
-                        path: options.path,
-                        value: datetime
+            // not sure if this is a garmin problem or a sigk parsing problem, but i occasionally
+            // see misformatted timestamp on navigation.datetime that similar to "1970-04-18T115:57:57.44770Z"
+            // my hack.. init a js Date object with the datetime string. if its bad, it will be "Invalid Date"
+            dtObject = new Date(datetime);
+            if (dtObject != "Invalid Date") {
+                app.handleMessage(plugin.id, {
+                    updates: [{
+                        values: [{
+                            path: options.path,
+                            value: dateFormat(dtObject, options.format)
+                        }]
                     }]
-                }]
-            });
+                });
+            }
         });
 
         // function update() {
