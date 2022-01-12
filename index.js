@@ -82,7 +82,7 @@ module.exports = function(app) {
     }
 
     plugin.stop = function() {
-        if (timer) {
+        if (typeof timer !== 'undefined') {
             clearInterval(timer);
             timeout = null;
         }
