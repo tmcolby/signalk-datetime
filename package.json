@@ -1,6 +1,6 @@
 {
     "name": "signalk-datetime",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "SignalK plugin that maps the output of the Linux 'date' command to a SignalK path",
     "main": "index.js",
     "scripts": {
