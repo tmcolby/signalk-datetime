@@ -17,6 +17,7 @@ const shell = require('shelljs');
 
 module.exports = function(app) {
     let plugin = {};
+    let timer = null;
 
     plugin.id = 'signalk-datetime';
     plugin.name = 'Datetime';
@@ -82,7 +83,7 @@ module.exports = function(app) {
     }
 
     plugin.stop = function() {
-        if (typeof timer !== 'undefined') {
+        if (timer) {
             clearInterval(timer);
             timeout = null;
         }
