@@ -17,6 +17,7 @@ const shell = require('shelljs');
 
 module.exports = function(app) {
     let plugin = {};
+    let timer = null;
 
     plugin.id = 'signalk-datetime';
     plugin.name = 'Datetime';
